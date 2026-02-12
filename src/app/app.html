@@ -1,0 +1,32 @@
+<header class="header">
+  <div class="header-container">
+    <div class="logo">
+      <a routerLink="/">Monopolio Agrícola</a>
+      <span class="edition">Edición Ecuador</span>
+    </div>
+    <nav class="navbar">
+      <a routerLink="/" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">Inicio</a>
+      <a routerLink="/como-jugar" routerLinkActive="active-link">Quiz</a>
+      <a routerLink="/creacion" routerLinkActive="active-link">Monopolio</a>
+      <a routerLink="/reglas" routerLinkActive="active-link">Reglas</a>
+      <a routerLink="/preguntas" routerLinkActive="active-link">Preguntas</a>
+      <ng-container *ngIf="(isLoggedIn$ | async) === false">
+        <a routerLink="/login" routerLinkActive="active-link">Iniciar Sesión</a>
+      </ng-container>
+      <ng-container *ngIf="isLoggedIn$ | async">
+        <span class="logged-in-user">Hola, {{ currentUsername$ | async }}</span>
+        <a (click)="logout()" class="logout-link">Cerrar Sesión</a>
+      </ng-container>
+    </nav>
+  </div>
+</header>
+
+<main class="main-content">
+  <router-outlet></router-outlet>
+</main>
+
+<footer class="footer">
+  <div class="footer-copyright">
+    <p>© 2026 Monopolio Agrícola del Ecuador. Todos los derechos reservados.</p>
+  </div>
+</footer>
